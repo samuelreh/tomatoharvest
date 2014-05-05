@@ -1,24 +1,34 @@
+require 'daemons'
+
 module Pom
   class Timer
 
-    DEFAULT_MINUTES = 25
+    def self.start(task_id, options = {})
+      minutes    = options[:minutes]
+      time_entry = options[:time_entry]
+      notifier   = Notifier.new
 
-    def initialize(task_id)
-      @task_id = task_id
-    end
-
-    def start(minutes = nil)
-      minutes ||= DEFAULT_MINUTES
       list = List.new
+      task = list.find(task_id)
 
-      Process.daemon
+      if Daemons.daemonize(app_name: '.pom', dir: '~/', dir_mode: :normal)
+        at_exit do
+          list.save
+          time_entry.log(task.logged_seconds / 60.0) if time_entry
+        end
+      end
 
-      task = list.find(@task_id)
-      while (minutes * 60) > task.logged_seconds do
+      notifier.notify "Pomadoro started for #{minutes} minutes", :subtitle => task.name
+
+      (minutes * 60).times do |i|
         sleep 1
         task.logged_seconds += 1
-        list.save
       end
+
+      list.save
+      time_entry.log(task.logged_seconds / 60.0) if time_entry
+
+      notifier.notify "Pomadoro finished", :subtitle => "Pomadoro finished!"
     end
 
     def self.stop

@@ -8,7 +8,6 @@ module Pom
 
     alias :all :items
 
-    # might be nice if list didnt know about item
     def self.add(item)
       new.tap do |list|
         list.add(item)

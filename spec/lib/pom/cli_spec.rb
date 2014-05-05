@@ -36,6 +36,31 @@ describe Pom::CLI do
       out = capture_io { Pom::CLI.start ['start', 1, 15] }.join ''
       expect(out).to match(/Timer started for foo/)
     end
+
+    context 'when config has valid harvest options' do
+
+      before do
+        full_path = File.expand_path('spec/.pomrc')
+        options = {
+          project:  'Pomadoro',
+          type:     'Ruby Development',
+          domain:   'domain',
+          username: 'user',
+          password: 'password'
+        }
+
+        File.open(full_path, 'w') do |file|
+          YAML::dump(options, file)
+        end
+      end
+
+      it 'starts the timer with specified length' do
+        out = capture_io { Pom::CLI.start ['start', 1] }.join ''
+        expect(out).to match(/Timer started for foo/)
+      end
+
+    end
+
   end
 
 end

@@ -2,6 +2,7 @@ require 'thor'
 
 module Pom
   class CLI < ::Thor
+    DEFAULT_MINUTES = 25
 
     desc "add", "add a task"
     def add(name)
@@ -22,10 +23,13 @@ module Pom
     end
 
     desc "start", "start a task"
-    def start(id, length = nil)
-      task = List.find(id)
+    def start(id, minutes = DEFAULT_MINUTES)
+      task    = List.find(id)
+      config  = Config.load
+      entry   = TimeEntry.build_and_test(config)
+
       say "Timer started for #{task.name}"
-      Timer.new(task.id).start(length)
+      Timer.start(task.id, minutes: minutes, time_entry: entry)
     end
 
     desc "stop", "stop current timer"
