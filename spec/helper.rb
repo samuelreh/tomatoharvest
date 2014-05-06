@@ -13,7 +13,7 @@ RSpec.configure do |c|
   # speed up the timer
   c.before :all do
     class Pom::Timer
-      def self.sleep(time)
+      def sleep(time)
         super(time/100000)
       end
     end
@@ -22,7 +22,7 @@ RSpec.configure do |c|
   c.before do
     body = {
       projects: [ {
-        name: 'Pomadoro',
+        name: 'Pomodoro',
         id: 1,
         tasks: [
           {
@@ -30,7 +30,8 @@ RSpec.configure do |c|
             id: 1
           }
         ]
-      } ]
+      } ],
+      day_entries: []
     }
 
     stub_request(:get, /https:\/\/user:password@domain.harvestapp.com\/daily\/.*/).

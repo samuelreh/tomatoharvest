@@ -13,12 +13,12 @@ describe Pom::Timer do
     end
 
     def stub_notifier(minutes)
-      message = "Pomadoro started for #{minutes} minutes"
+      message = "Pomodoro started for #{minutes} minutes"
       options = {:title=>"Pom", :subtitle=> 'foo'}
       TerminalNotifier.should_receive(:notify).with(message, options)
 
-      message = "Pomadoro finished"
-      options = {:title=>"Pom", :subtitle=> 'Pomadoro finished!'}
+      message = "Pomodoro finished"
+      options = {:title=>"Pom", :subtitle=> 'Pomodoro finished!'}
       TerminalNotifier.should_receive(:notify).with(message, options)
     end
 
@@ -41,20 +41,6 @@ describe Pom::Timer do
       entry.should_receive(:log)
       Pom::Timer.start(task.id, time_entry: entry, minutes: 25)
     end
-
-    #describe '.stop' do
-
-      #it 'logs only the amount of time elapsed' do
-        #timer.start
-        #sleep(0.5)
-        #timer.stop
-
-        #reloaded_task = Pom::List.find(task.id)
-        #expect(reloaded_task.logged_minutes).to_not eql(0.0)
-        #expect(reloaded_task.logged_minutes).to_not eql(25.0)
-      #end
-
-    #end
 
   end
 

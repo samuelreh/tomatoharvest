@@ -7,7 +7,7 @@ module Pom
     attr_accessor :options
 
     def self.build_and_test(options = {})
-      required = [:domain, :username, :password, :project, :type].to_set
+      required = [:domain, :username, :password, :project, :type, :name].to_set
       keys = options.keys.to_set
       if required.subset?(keys)
         new(options).tap do |entry|
@@ -31,8 +31,8 @@ module Pom
     ##
     # Persist time entry to Harvest tracker
 
-    def log(minutes)
-      hours = minutes_to_hours(minutes)
+    def log(seconds)
+      hours = seconds_to_hours(seconds)
       options = {
         notes: notes,
         hours: hours,
@@ -40,8 +40,20 @@ module Pom
         project_id: project.id,
         task_id: task.id
       }
-      entry = Harvest::TimeEntry.new(options)
-      harvest.time.create(entry)
+
+
+      existing_entry = time_api.all.find do |entry|
+        entry.name == self.notes
+      end
+
+      if existing_entry
+        existing_entry.hours += hours
+        existing_entry.spent_at = date
+        time_api.update(existing_entry)
+      else
+        entry = Harvest::TimeEntry.new(options)
+        time_api.create(entry)
+      end
     end
 
     ##
@@ -55,13 +67,14 @@ module Pom
     # Date for task (today), formatted properly for tracker
 
     def date
-      Date.today.strftime("%d/%m/%Y")
+      Date.today
     end
 
     ##
-    # Convert minutes into hours
+    # Convert seconds into hours
 
-    def minutes_to_hours(minutes)
+    def seconds_to_hours(seconds)
+      minutes = (seconds / 60.0)
       unrounded = (minutes / 60.0)
       (unrounded * 100).ceil / 100.0
     end
@@ -70,7 +83,6 @@ module Pom
     # Harvest project with name matching options[:project]
 
     def project
-      time_api = Harvest::API::Time.new(harvest.credentials)
       time_api.trackable_projects.find do |project|
         project.name == options[:project]
       end
@@ -87,8 +99,11 @@ module Pom
 
     private
 
-    def harvest
-      @harvest ||= Harvest.client(options[:domain], options[:username], options[:password])
+    def time_api
+      @time_api ||= begin
+        client = Harvest.client(options[:domain], options[:username], options[:password])
+        Harvest::API::Time.new(client.credentials)
+      end
     end
 
   end

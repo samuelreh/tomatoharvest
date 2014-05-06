@@ -42,7 +42,7 @@ describe Pom::CLI do
       before do
         full_path = File.expand_path('spec/.pomrc')
         options = {
-          project:  'Pomadoro',
+          project:  'Pomodoro',
           type:     'Ruby Development',
           domain:   'domain',
           username: 'user',
