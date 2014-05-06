@@ -7,7 +7,7 @@ module Pom
     attr_accessor :options
 
     def self.build_and_test(options = {})
-      required = [:domain, :username, :password, :project, :type, :name].to_set
+      required = ["domain", "username", "password", "project", "type", "name"].to_set
       keys = options.keys.to_set
       if required.subset?(keys)
         new(options).tap do |entry|
@@ -60,7 +60,7 @@ module Pom
     # Notes to send to tracker
 
     def notes
-      options[:name]
+      options["name"]
     end
 
     ##
@@ -84,7 +84,7 @@ module Pom
 
     def project
       time_api.trackable_projects.find do |project|
-        project.name == options[:project]
+        project.name == options["project"]
       end
     end
 
@@ -93,7 +93,7 @@ module Pom
 
     def task
       project.tasks.find do |task|
-        task.name == options[:type]
+        task.name == options["type"]
       end
     end
 
@@ -101,7 +101,7 @@ module Pom
 
     def time_api
       @time_api ||= begin
-        client = Harvest.client(options[:domain], options[:username], options[:password])
+        client = Harvest.client(options["domain"], options["username"], options["password"])
         Harvest::API::Time.new(client.credentials)
       end
     end

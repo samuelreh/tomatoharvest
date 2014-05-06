@@ -25,7 +25,7 @@ module Pom
     desc "start", "start a task"
     def start(id, minutes = DEFAULT_MINUTES)
       task    = List.find(id)
-      config  = Config.load.merge(name: task.name)
+      config  = Config.load.merge("name" => task.name)
       entry   = TimeEntry.build_and_test(config)
 
       say "Timer started for #{task.name}"

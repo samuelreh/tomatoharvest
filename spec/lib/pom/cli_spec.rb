@@ -40,7 +40,7 @@ describe Pom::CLI do
     context 'when config has valid harvest options' do
 
       before do
-        full_path = File.expand_path('spec/.pomrc')
+        path = Pom::Config::CONFIG_PATH = File.expand_path('spec/.pomrc')
         options = {
           project:  'Pomodoro',
           type:     'Ruby Development',
@@ -49,7 +49,7 @@ describe Pom::CLI do
           password: 'password'
         }
 
-        File.open(full_path, 'w') do |file|
+        File.open(path, 'w') do |file|
           YAML::dump(options, file)
         end
       end
