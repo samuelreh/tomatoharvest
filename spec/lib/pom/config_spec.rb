@@ -4,11 +4,6 @@ describe Pom::Config do
 
   describe '.load' do
 
-    before do
-      path = Pom::Config::CONFIG_PATH = File.expand_path('spec/.pomrc')
-      File.delete(path) if File.exists?(path)
-    end
-
     it 'loads from the yaml config file' do
       options = {
         project: 'Project',

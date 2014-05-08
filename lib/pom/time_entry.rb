@@ -43,7 +43,7 @@ module Pom
 
 
       existing_entry = time_api.all.find do |entry|
-        entry.name == self.notes
+        entry.notes == self.notes
       end
 
       if existing_entry

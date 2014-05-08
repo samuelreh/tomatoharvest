@@ -25,15 +25,14 @@ describe Pom::TimeEntry do
   describe '#log' do
 
     context 'task is already logged today' do
-
       let(:options) do
         {
-          domain: 'domain',
-          username: 'user',
-          password: 'password',
-          project: 'Pomodoro',
-          type: 'Ruby Development',
-          name: 'Template Refactoring'
+          'domain' => 'domain',
+          'username' => 'user',
+          'password' => 'password',
+          'project' => 'Pomodoro',
+          'type' => 'Ruby Development',
+          'name' => 'Template Refactoring'
         }
       end
 
@@ -51,7 +50,7 @@ describe Pom::TimeEntry do
           } ],
 
           day_entries: [ {
-            name: 'Template Refactoring',
+            notes: 'Template Refactoring',
             project_id: 1,
             task_id: 1,
             hours: 1
@@ -65,7 +64,7 @@ describe Pom::TimeEntry do
       it 'updates exisiting entry' do
         update_url = "https://user:password@domain.harvestapp.com/daily/update/"
         body = {
-          name: "Template Refactoring",
+          notes: "Template Refactoring",
           project_id: 1,
           task_id: 1,
           hours: 1.5,
@@ -86,7 +85,7 @@ describe Pom::TimeEntry do
   describe '#notes' do
 
     it 'concats name and description' do
-      entry = described_class.new(name: "Name")
+      entry = described_class.new('name' => "Name")
       expect(entry.notes).to eql("Name")
     end
 

@@ -28,19 +28,23 @@ module Pom
     def start
       if Daemons.daemonize(app_name: APP_NAME, dir: DIR, dir_mode: :normal)
         at_exit { save_and_log }
+        run_timer
+      else
+        run_timer
+        save_and_log
       end
+    end
 
+    private
+
+    def run_timer
       @notifier.notify "Pomodoro started for #{@minutes} minutes", :subtitle => @task.name
 
       (@minutes * 60).times do |i|
         sleep 1
         @timer += 1
       end
-
-      save_and_log
     end
-
-    private
 
     def save_and_log
       @task.log_pomodoro(@timer)

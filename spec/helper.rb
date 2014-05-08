@@ -8,9 +8,12 @@ require 'minitest/unit'
 WebMock.disable_net_connect!(allow_localhost: true)
 
 RSpec.configure do |c|
+  c.mock_framework = :rspec
   c.include MiniTest::Assertions
 
-  # speed up the timer
+  #
+  # Speed up the timer
+  #
   c.before :all do
     class Pom::Timer
       def sleep(time)
@@ -19,6 +22,9 @@ RSpec.configure do |c|
     end
   end
 
+  #
+  # Stub HTTP requests
+  #
   c.before do
     body = {
       projects: [ {
@@ -43,20 +49,32 @@ RSpec.configure do |c|
       to_return(:status => 200, :body => "", :headers => {})
   end
 
-  # TODO find a better way to stub Daemon
+  #
+  # Don't daemonize for tests
+  # Dont notify the terminal
+  #
   c.before do
     Daemons.stub(daemonize: false)
     TerminalNotifier.stub(notify: true)
   end
 
-  path = 'spec/.pom'
-  Pom::List::PATH = File.expand_path(path)
+  #
+  # Cleanup .pom and .pomrc
+  #
 
-  c.before :each do
-    File.delete(path) if File.exists?(path)
-  end
+  [
+    ["Pom::Config::CONFIG_PATH", File.expand_path('spec/.pom')],
+    ["Pom::List::PATH",          File.expand_path('spec/.pomrc')]
+  ].each do |tuple|
+    path = tuple[1]
 
-  c.after :each do
-    File.delete(path) if File.exists?(path)
+    c.before :each do
+      stub_const(tuple[0], path)
+      File.delete(path) if File.exists?(path)
+    end
+
+    c.after :each do
+      File.delete(path) if File.exists?(path)
+    end
   end
 end
