@@ -3,4 +3,5 @@
 * Fix 0 hr bug
 * Config file and list per directory
 * Count down?
+* Rename type to task
 * Refactor
