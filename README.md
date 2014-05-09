@@ -1,4 +1,5 @@
-# TomatoHarvest: Command line pomodoro timer that logs to Harvest.
+# TomatoHarvest
+Command line pomodoro timer that logs to Harvest.
 
 ## Installation
 
@@ -6,9 +7,9 @@
 
 ## Usage
 
-toma add "Some Task I Have To Do"
-toma list
-toma start 1
+    $ toma add "Some Task I Have To Do"
+    $ toma list
+    $ toma start 1
 
 ## Contributing
 
