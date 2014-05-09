@@ -10,15 +10,8 @@ module TomatoHarvest
 
     def tmux_time(time)
       mm, ss = time.divmod(60)
-
-      case mm
-      when 0
-        "#{mm}:#{ss}"
-      when 1..5
-        "#[default]#[fg=red]#{mm}:#{ss}#[default]"
-      when 6..100
-        "#[default]#[fg=green]#{mm}:#{ss}#[default]"
-      end
+      ss = ss.to_s.rjust(2, "0")
+      "#[default]#[fg=green]#{mm}:#{ss}#[default]"
     end
 
     def write_tmux_time(time)
