@@ -53,6 +53,7 @@ module TomatoHarvest
       @list.save
       @time_entry.log(@timer) if @time_entry
       @notifier.notify "Pomodoro finished", :subtitle => "Pomodoro finished!"
+      @tmux.update(0)
     end
 
   end
