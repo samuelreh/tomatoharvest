@@ -1,28 +1,18 @@
-# Pom
-
-TODO: Write a gem description
+# TomatoHarvest: Command line pomodoro timer that logs to Harvest.
 
 ## Installation
 
-Add this line to your application's Gemfile:
-
-    gem 'pom'
-
-And then execute:
-
-    $ bundle
-
-Or install it yourself as:
-
-    $ gem install pom
+    $ gem install tomatoharvest
 
 ## Usage
 
-TODO: Write usage instructions here
+toma add "Some Task I Have To Do"
+toma list
+toma start 1
 
 ## Contributing
 
-1. Fork it ( https://github.com/[my-github-username]/po/fork )
+1. Fork it ( https://github.com/samuelreh/tomatoharvest/fork )
 2. Create your feature branch (`git checkout -b my-new-feature`)
 3. Commit your changes (`git commit -am 'Add some feature'`)
 4. Push to the branch (`git push origin my-new-feature`)

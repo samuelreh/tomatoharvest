@@ -8,9 +8,9 @@ Gem::Specification.new do |spec|
   spec.version       = TomatoHarvest::VERSION
   spec.authors       = ["Sam Reh"]
   spec.email         = ["samuelreh@gmail.com"]
-  spec.summary       = %q{yar}
-  spec.description   = %q{yar}
-  spec.homepage      = ""
+  spec.summary       = %q{Log your pomodoros to Harvest}
+  spec.description   = %q{Command line pomodoro timer that logs to Harvest.}
+  spec.homepage      = "http://github.com/samuelreh/tomatoharvest/"
   spec.license       = "MIT"
 
   spec.files         = `git ls-files -z`.split("\x0")
