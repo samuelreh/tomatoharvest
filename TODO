@@ -1,0 +1,6 @@
+* Test Tmux
+* Put files in ~/.toma/rc, ~/.toma/list, ~/.toma/tmux
+* Fix 0 hr bug
+* Config file and list per directory
+* Count down?
+* Refactor
