@@ -41,7 +41,7 @@ describe TomatoHarvest::CLI do
 
       before do
         options = {
-          project:  'TomatoHarvestodoro',
+          project:  'Pomodoro',
           type:     'Ruby Development',
           domain:   'domain',
           username: 'user',

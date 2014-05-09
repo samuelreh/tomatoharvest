@@ -28,7 +28,7 @@ RSpec.configure do |c|
   c.before do
     body = {
       projects: [ {
-        name: 'TomatoHarvestodoro',
+        name: 'Pomdoro',
         id: 1,
         tasks: [
           {

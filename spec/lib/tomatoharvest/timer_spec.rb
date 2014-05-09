@@ -13,12 +13,12 @@ describe TomatoHarvest::Timer do
     end
 
     def stub_notifier(minutes)
-      message = "TomatoHarvestodoro started for #{minutes} minutes"
+      message = "Pomodoro started for #{minutes} minutes"
       options = {:title=>"TomatoHarvest", :subtitle=> 'foo'}
       TerminalNotifier.should_receive(:notify).with(message, options)
 
-      message = "TomatoHarvestodoro finished"
-      options = {:title=>"TomatoHarvest", :subtitle=> 'TomatoHarvestodoro finished!'}
+      message = "Pomodoro finished"
+      options = {:title=>"TomatoHarvest", :subtitle=> 'Pomodoro finished!'}
       TerminalNotifier.should_receive(:notify).with(message, options)
     end
 

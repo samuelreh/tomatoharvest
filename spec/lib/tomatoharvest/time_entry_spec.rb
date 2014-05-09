@@ -30,7 +30,7 @@ describe TomatoHarvest::TimeEntry do
           'domain' => 'domain',
           'username' => 'user',
           'password' => 'password',
-          'project' => 'TomatoHarvestodoro',
+          'project' => 'Pomodoro',
           'type' => 'Ruby Development',
           'name' => 'Template Refactoring'
         }
@@ -39,7 +39,7 @@ describe TomatoHarvest::TimeEntry do
       before do
         body = {
           projects: [ {
-            name: 'TomatoHarvestodoro',
+            name: 'Pomodoro',
             id: 1,
             tasks: [
               {
