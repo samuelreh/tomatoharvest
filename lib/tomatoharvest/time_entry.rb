@@ -1,7 +1,7 @@
 require 'set'
 require 'harvested'
 
-module Pom
+module TomatoHarvest
   class TimeEntry
 
     attr_accessor :options

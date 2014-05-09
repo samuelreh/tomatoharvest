@@ -1,6 +1,6 @@
 require 'yaml'
 
-module Pom
+module TomatoHarvest
   class List
     PATH = '~/.pom'
 

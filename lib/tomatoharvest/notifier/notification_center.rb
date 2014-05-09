@@ -1,10 +1,10 @@
-require 'terminal-notifier' if Pom::OS.mac?
+require 'terminal-notifier' if TomatoHarvest::OS.mac?
 
-module Pom
+module TomatoHarvest
   class Notifier
     class NotificationCenter
       def notify(message, opts = {})
-        title = 'Pom'
+        title = 'TomatoHarvest'
 
         TerminalNotifier.notify message, :title => title, :subtitle => opts[:subtitle]
       end

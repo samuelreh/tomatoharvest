@@ -1,4 +1,4 @@
-module Pom
+module TomatoHarvest
   class Task
 
     attr_reader :name

@@ -1,4 +1,4 @@
-module Pom
+module TomatoHarvest
   class Config
     CONFIG_PATH = File.expand_path('~/.pomrc')
 

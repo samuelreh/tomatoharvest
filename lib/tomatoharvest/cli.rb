@@ -1,6 +1,6 @@
 require 'thor'
 
-module Pom
+module TomatoHarvest
   class CLI < ::Thor
     DEFAULT_MINUTES = 25
 

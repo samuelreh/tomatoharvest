@@ -1,17 +1,17 @@
 require 'helper'
 
-describe Pom::List do
+describe TomatoHarvest::List do
 
   def add_task(name)
-    task = Pom::Task.new(name)
-    Pom::List.add(task)
+    task = TomatoHarvest::Task.new(name)
+    TomatoHarvest::List.add(task)
   end
 
   describe '.add' do
 
     it 'adds to the list' do
       add_task('foo')
-      expect(described_class.all.first).to be_an_instance_of(Pom::Task)
+      expect(described_class.all.first).to be_an_instance_of(TomatoHarvest::Task)
     end
 
   end
@@ -40,7 +40,7 @@ describe Pom::List do
   describe '#add' do
 
     it 'adds the task to the items array' do
-      task = Pom::Task.new('foo')
+      task = TomatoHarvest::Task.new('foo')
       list = described_class.new
       list.add(task)
       expect(list.items.first.id).to eql(1)

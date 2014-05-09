@@ -1,4 +1,4 @@
-module Pom
+module TomatoHarvest
   class Pomodoro
     attr_accessor :seconds, :finished_at
 

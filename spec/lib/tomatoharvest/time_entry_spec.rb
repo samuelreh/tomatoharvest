@@ -1,6 +1,6 @@
 require 'helper'
 
-describe Pom::TimeEntry do
+describe TomatoHarvest::TimeEntry do
 
   describe '#test' do
 
@@ -30,7 +30,7 @@ describe Pom::TimeEntry do
           'domain' => 'domain',
           'username' => 'user',
           'password' => 'password',
-          'project' => 'Pomodoro',
+          'project' => 'TomatoHarvestodoro',
           'type' => 'Ruby Development',
           'name' => 'Template Refactoring'
         }
@@ -39,7 +39,7 @@ describe Pom::TimeEntry do
       before do
         body = {
           projects: [ {
-            name: 'Pomodoro',
+            name: 'TomatoHarvestodoro',
             id: 1,
             tasks: [
               {
@@ -72,7 +72,7 @@ describe Pom::TimeEntry do
         }
         stub = stub_request(:put, update_url).with(:body => body.to_json)
 
-        entry = Pom::TimeEntry.new(options)
+        entry = TomatoHarvest::TimeEntry.new(options)
         entry.log(60 * 30)
 
         stub.should have_been_requested

@@ -1,10 +1,10 @@
 require_relative 'notifier/notification_center'
 
-module Pom
+module TomatoHarvest
   class Notifier
 
     def initialize
-      @notifier = Pom::Notifier::NotificationCenter.new
+      @notifier = TomatoHarvest::Notifier::NotificationCenter.new
     end
 
     def notify(message, opts = {})

@@ -1,6 +1,6 @@
 require 'rbconfig'
 
-module Pom
+module TomatoHarvest
   module OS
     module_function
 

@@ -1,11 +1,11 @@
 # coding: utf-8
 lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require 'pom'
+require 'tomatoharvest'
 
 Gem::Specification.new do |spec|
-  spec.name          = "pom"
-  spec.version       = Pom::VERSION
+  spec.name          = "TomatoHarvest"
+  spec.version       = TomatoHarvest::VERSION
   spec.authors       = ["Sam Reh"]
   spec.email         = ["samuelreh@gmail.com"]
   spec.summary       = %q{yar}
@@ -26,5 +26,5 @@ Gem::Specification.new do |spec|
   spec.add_dependency('thor', '~> 0.19')
   spec.add_dependency('harvested')
   spec.add_dependency('daemons')
-  spec.add_dependency('terminal-notifier', '~> 1.4') if Pom::OS.mac?
+  spec.add_dependency('terminal-notifier', '~> 1.4') if TomatoHarvest::OS.mac?
 end

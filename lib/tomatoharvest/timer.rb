@@ -1,6 +1,6 @@
 require 'daemons'
 
-module Pom
+module TomatoHarvest
   class Timer
     DIR = '~'
     APP_NAME = '.pom'

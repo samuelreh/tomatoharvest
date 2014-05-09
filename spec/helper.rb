@@ -1,6 +1,6 @@
 $LOAD_PATH.unshift(File.join(File.dirname(__FILE__), "..", "lib"))
 require 'thor'
-require 'pom'
+require 'tomatoharvest'
 
 require 'webmock/rspec'
 require 'minitest/unit'
@@ -15,7 +15,7 @@ RSpec.configure do |c|
   # Speed up the timer
   #
   c.before :all do
-    class Pom::Timer
+    class TomatoHarvest::Timer
       def sleep(time)
         super(time/100000)
       end
@@ -28,7 +28,7 @@ RSpec.configure do |c|
   c.before do
     body = {
       projects: [ {
-        name: 'Pomodoro',
+        name: 'TomatoHarvestodoro',
         id: 1,
         tasks: [
           {
@@ -63,8 +63,8 @@ RSpec.configure do |c|
   #
 
   [
-    ["Pom::Config::CONFIG_PATH", File.expand_path('spec/.pom')],
-    ["Pom::List::PATH",          File.expand_path('spec/.pomrc')]
+    ["TomatoHarvest::Config::CONFIG_PATH", File.expand_path('spec/.pom')],
+    ["TomatoHarvest::List::PATH",          File.expand_path('spec/.pomrc')]
   ].each do |tuple|
     path = tuple[1]
 

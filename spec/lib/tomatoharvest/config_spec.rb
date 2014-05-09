@@ -1,6 +1,6 @@
 require 'helper'
 
-describe Pom::Config do
+describe TomatoHarvest::Config do
 
   describe '.load' do
 
@@ -9,11 +9,11 @@ describe Pom::Config do
         project: 'Project',
         type:    'Ruby Development',
       }
-      File.open(Pom::Config::CONFIG_PATH, 'w') do |file|
+      File.open(TomatoHarvest::Config::CONFIG_PATH, 'w') do |file|
         YAML::dump(options, file)
       end
 
-      expect(Pom::Config.load).to eql(options)
+      expect(TomatoHarvest::Config.load).to eql(options)
     end
 
   end
