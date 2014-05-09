@@ -3,7 +3,7 @@ require 'daemons'
 module TomatoHarvest
   class Timer
     DIR = '~'
-    APP_NAME = '.pom'
+    APP_NAME = '.toma'
 
     def self.start(task_id, options = {})
       new(task_id, options).start

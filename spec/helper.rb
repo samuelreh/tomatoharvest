@@ -59,12 +59,12 @@ RSpec.configure do |c|
   end
 
   #
-  # Cleanup .pom and .pomrc
+  # Cleanup .toma and .tomarc
   #
 
   [
-    ["TomatoHarvest::Config::CONFIG_PATH", File.expand_path('spec/.pom')],
-    ["TomatoHarvest::List::PATH",          File.expand_path('spec/.pomrc')]
+    ["TomatoHarvest::Config::CONFIG_PATH", File.expand_path('spec/.toma')],
+    ["TomatoHarvest::List::PATH",          File.expand_path('spec/.toma')]
   ].each do |tuple|
     path = tuple[1]
 

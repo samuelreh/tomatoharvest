@@ -2,7 +2,7 @@ require 'yaml'
 
 module TomatoHarvest
   class List
-    PATH = '~/.pom'
+    PATH = '~/.toma'
 
     attr_reader :items
 
