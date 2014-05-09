@@ -18,3 +18,6 @@ Command line pomodoro timer that logs to Harvest.
 3. Commit your changes (`git commit -am 'Add some feature'`)
 4. Push to the branch (`git push origin my-new-feature`)
 5. Create a new Pull Request
+
+## Credits
+This application is heavily inspired by https://github.com/visionmedia/pomo.
