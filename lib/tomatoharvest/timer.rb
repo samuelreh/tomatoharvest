@@ -23,6 +23,7 @@ module TomatoHarvest
       @list       = List.new
       @task       = @list.find(task_id)
       @timer      = 0
+      @tmux       = Tmux.new
     end
 
     def start
@@ -43,6 +44,7 @@ module TomatoHarvest
       (@minutes * 60).times do |i|
         sleep 1
         @timer += 1
+        @tmux.update(@timer)
       end
     end
 
