@@ -63,8 +63,9 @@ RSpec.configure do |c|
   #
 
   [
-    ["TomatoHarvest::Config::CONFIG_PATH", File.expand_path('spec/.tomaconfig')],
-    ["TomatoHarvest::List::PATH",          File.expand_path('spec/.toma')]
+    ["TomatoHarvest::Config::CONFIG_PATH",       File.expand_path('spec/.tomaconfig')],
+    ["TomatoHarvest::Config::LOCAL_CONFIG_PATH", File.expand_path('.tomaconfig')],
+    ["TomatoHarvest::List::PATH",                File.expand_path('spec/.toma')]
   ].each do |tuple|
     path = tuple[1]
 
