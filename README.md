@@ -1,6 +1,8 @@
 # TomatoHarvest
 Command line pomodoro timer that logs to Harvest.
 
+[![Code Climate](https://codeclimate.com/github/samuelreh/tomatoharvest.png)](https://codeclimate.com/github/samuelreh/tomatoharvest)
+
 ## Installation
 
     $ gem install tomatoharvest
