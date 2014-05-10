@@ -11,7 +11,7 @@ Create a file called ~/.tomaconfig with options:
   username: username
   password: password
   project: harvest project
-  type: harvest task
+  task: harvest task
 ```
 
 ## Usage

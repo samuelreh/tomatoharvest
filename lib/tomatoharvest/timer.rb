@@ -2,8 +2,8 @@ require 'daemons'
 
 module TomatoHarvest
   class Timer
-    DIR = '~'
-    APP_NAME = '.toma'
+    PID_DIR = '~'
+    PID_NAME = '.toma'
 
     def self.start(task_id, options = {})
       new(task_id, options).start
@@ -27,7 +27,7 @@ module TomatoHarvest
     end
 
     def start
-      if Daemons.daemonize(app_name: APP_NAME, dir: DIR, dir_mode: :normal)
+      if Daemons.daemonize(app_name: PID_NAME, dir: PID_DIR, dir_mode: :normal)
         at_exit { save_and_log }
         run_timer
       else

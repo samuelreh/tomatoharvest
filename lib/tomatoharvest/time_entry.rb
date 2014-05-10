@@ -7,7 +7,7 @@ module TomatoHarvest
     attr_accessor :options
 
     def self.build_and_test(options = {})
-      required = ["domain", "username", "password", "project", "type", "name"].to_set
+      required = ["domain", "username", "password", "project", "task", "name"].to_set
       keys = options.keys.to_set
       if required.subset?(keys)
         new(options).tap do |entry|
@@ -93,7 +93,7 @@ module TomatoHarvest
 
     def task
       project.tasks.find do |task|
-        task.name == options["type"]
+        task.name == options["task"]
       end
     end
 

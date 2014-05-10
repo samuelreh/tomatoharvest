@@ -31,7 +31,7 @@ describe TomatoHarvest::TimeEntry do
           'username' => 'user',
           'password' => 'password',
           'project' => 'Pomodoro',
-          'type' => 'Ruby Development',
+          'task' => 'Ruby Development',
           'name' => 'Template Refactoring'
         }
       end
