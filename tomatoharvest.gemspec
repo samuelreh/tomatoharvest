@@ -4,7 +4,7 @@ $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 require 'tomatoharvest'
 
 Gem::Specification.new do |spec|
-  spec.name          = "TomatoHarvest"
+  spec.name          = "tomatoharvest"
   spec.version       = TomatoHarvest::VERSION
   spec.authors       = ["Sam Reh"]
   spec.email         = ["samuelreh@gmail.com"]
