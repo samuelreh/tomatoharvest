@@ -1,6 +1,6 @@
 module TomatoHarvest
   class Config
-    CONFIG_PATH = File.expand_path('~/.tomarc')
+    CONFIG_PATH = File.expand_path("#{ENV['$HOME']}/.tomaconfig")
 
     def self.load(options = {})
       if !(File.exists? CONFIG_PATH)
