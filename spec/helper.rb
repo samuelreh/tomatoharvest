@@ -8,7 +8,6 @@ require 'minitest/unit'
 WebMock.disable_net_connect!(allow_localhost: true)
 
 RSpec.configure do |c|
-  c.mock_framework = :rspec
   c.include MiniTest::Assertions
 
   #
@@ -56,6 +55,7 @@ RSpec.configure do |c|
   c.before do
     Daemons.stub(daemonize: false)
     TerminalNotifier.stub(notify: true)
+    TomatoHarvest::Tmux.any_instance.stub(update: true)
   end
 
   #

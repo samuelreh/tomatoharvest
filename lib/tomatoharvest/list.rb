@@ -2,7 +2,7 @@ require 'yaml'
 
 module TomatoHarvest
   class List
-    PATH = '~/.toma'
+    PATH = File.expand_path("#{ENV['$HOME']}/.toma")
 
     attr_reader :items
 
@@ -23,10 +23,8 @@ module TomatoHarvest
       new.find(id)
     end
 
-    def initialize(path = PATH)
-      @path = path
-
-      if File.exists?(full_path)
+    def initialize
+      if File.exists?(PATH)
         @items = load_list
       else
         @items = []
@@ -40,13 +38,9 @@ module TomatoHarvest
       end
     end
 
-    def full_path
-      File.expand_path(@path)
-    end
-
     def save
       yaml = YAML::dump(@items)
-      File.open(full_path, "w+") do |f|
+      File.open(PATH, "w+") do |f|
         f.write(yaml)
       end
     end
@@ -68,7 +62,7 @@ module TomatoHarvest
       string = ""
 
       # better way to do this?
-      File.open(full_path, "r") do |f|
+      File.open(PATH, "r") do |f|
         while line = f.gets
           string += line
         end
