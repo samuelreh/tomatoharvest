@@ -23,42 +23,46 @@ describe TomatoHarvest::TimeEntry do
   end
 
   describe '#log' do
+    let(:options) do
+      {
+        'domain' => 'domain',
+        'username' => 'user',
+        'password' => 'password',
+        'project' => 'Pomodoro',
+        'task' => 'Ruby Development',
+        'name' => 'Template Refactoring'
+      }
+    end
+
+    let(:entries) { [] }
+
+    before do
+      body = {
+        projects: [ {
+          name: 'Pomodoro',
+          id: 1,
+          tasks: [
+            {
+              name: 'Ruby Development',
+              id: 1
+            }
+          ]
+        } ],
+        day_entries: entries
+      }
+
+      stub_request(:get, /https:\/\/user:password@domain.harvestapp.com\/daily\/.*/).
+        to_return(:status => 200, :body => body.to_json, :headers => {})
+    end
 
     context 'task is already logged today' do
-      let(:options) do
-        {
-          'domain' => 'domain',
-          'username' => 'user',
-          'password' => 'password',
-          'project' => 'Pomodoro',
-          'task' => 'Ruby Development',
-          'name' => 'Template Refactoring'
-        }
-      end
-
-      before do
-        body = {
-          projects: [ {
-            name: 'Pomodoro',
-            id: 1,
-            tasks: [
-              {
-                name: 'Ruby Development',
-                id: 1
-              }
-            ]
-          } ],
-
-          day_entries: [ {
-            notes: 'Template Refactoring',
-            project_id: 1,
-            task_id: 1,
-            hours: 1
-          } ]
-        }
-
-        stub_request(:get, /https:\/\/user:password@domain.harvestapp.com\/daily\/.*/).
-          to_return(:status => 200, :body => body.to_json, :headers => {})
+      let(:entries) do
+        [ {
+          notes: 'Template Refactoring',
+          project_id: 1,
+          task_id: 1,
+          hours: 1
+        } ]
       end
 
       it 'updates exisiting entry' do
@@ -76,6 +80,20 @@ describe TomatoHarvest::TimeEntry do
         entry.log(60 * 30)
 
         stub.should have_been_requested
+      end
+
+    end
+
+    context 'seconds are rounded to 0.00 hours' do
+
+      it 'should not log' do
+        update_url = "https://user:password@domain.harvestapp.com/daily/add"
+        stub = stub_request(:post, update_url)
+
+        entry = TomatoHarvest::TimeEntry.new(options)
+        entry.log(0)
+
+        expect(stub).not_to have_been_requested
       end
 
     end

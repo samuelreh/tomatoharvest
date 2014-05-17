@@ -33,6 +33,7 @@ module TomatoHarvest
 
     def log(seconds)
       hours = seconds_to_hours(seconds)
+      return if hours == 0
       options = {
         notes: notes,
         hours: hours,
