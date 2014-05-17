@@ -1,4 +1,5 @@
+* Task list per directory
+* Make a dir: ~/.toma/config ~/.toma/pid ~/.toma/list ~/.toma/tmux
 * Test Tmux
-* Fix 0 hr bug
 * Refactor
 * Count down?
