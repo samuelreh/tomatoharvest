@@ -48,4 +48,14 @@ describe TomatoHarvest::List do
 
   end
 
+  describe '.remove' do
+
+    it 'removes the task from the item array' do
+      add_task('foo')
+      described_class.remove(1)
+      expect(described_class.all.count).to eql(0)
+    end
+
+  end
+
 end

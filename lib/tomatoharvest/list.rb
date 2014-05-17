@@ -23,6 +23,13 @@ module TomatoHarvest
       new.find(id)
     end
 
+    def self.remove(id)
+      new.tap do |list|
+        list.remove(id)
+        list.save
+      end
+    end
+
     def initialize
       if File.exists?(PATH)
         @items = load_list
@@ -54,6 +61,12 @@ module TomatoHarvest
       item.id = id + 1
 
       @items << item
+    end
+
+    def remove(id)
+      all.delete_if do |item|
+        item.id == id.to_i
+      end
     end
 
     private

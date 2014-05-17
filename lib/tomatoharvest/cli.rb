@@ -41,6 +41,11 @@ module TomatoHarvest
       end
     end
 
+    desc "remove", "remove a task"
+    def remove(id)
+      task = List.remove(id)
+      say "#{id} removed"
+    end
 
   end
 end

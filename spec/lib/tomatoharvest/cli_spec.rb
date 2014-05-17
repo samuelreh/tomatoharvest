@@ -22,6 +22,18 @@ describe TomatoHarvest::CLI do
 
   end
 
+  describe 'remove' do
+    before do
+      TomatoHarvest::CLI.start ['add', 'foo']
+    end
+
+    it 'removes task from the list' do
+      out = capture_io { TomatoHarvest::CLI.start ['remove', 1] }.join ''
+      expect(out).to match(/1 removed/)
+    end
+
+  end
+
   describe 'start' do
     before do
       TomatoHarvest::CLI.start ['add', 'foo']
