@@ -2,7 +2,7 @@ require 'yaml'
 
 module TomatoHarvest
   class List
-    PATH = File.expand_path("#{ENV['$HOME']}/.toma")
+    PATH = File.expand_path("#{ENV['HOME']}/.toma")
 
     attr_reader :items
 

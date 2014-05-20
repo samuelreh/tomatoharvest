@@ -1,6 +1,6 @@
 module TomatoHarvest
   class Config
-    CONFIG_PATH = File.expand_path("#{ENV['$HOME']}/.tomaconfig")
+    CONFIG_PATH = File.expand_path("#{ENV['HOME']}/.tomaconfig")
     LOCAL_CONFIG_PATH = File.join(Dir.pwd, '.tomaconfig')
 
     def self.load(options = {})
