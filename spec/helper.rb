@@ -63,19 +63,16 @@ RSpec.configure do |c|
   #
 
   [
-    ["TomatoHarvest::Config::CONFIG_PATH",       File.expand_path('spec/.tomaconfig')],
-    ["TomatoHarvest::Config::LOCAL_CONFIG_PATH", File.expand_path('.tomaconfig')],
-    ["TomatoHarvest::List::PATH",                File.expand_path('spec/.toma')]
-  ].each do |tuple|
-    path = tuple[1]
-
+    ["TomatoHarvest::Config::GLOBAL_DIR", File.expand_path('spec/.toma/')],
+    ["TomatoHarvest::Config::LOCAL_DIR",  File.expand_path('.toma/')]
+  ].each do |const, path|
     c.before :each do
-      stub_const(tuple[0], path)
-      File.delete(path) if File.exists?(path)
+      stub_const(const, path)
+      FileUtils.rm_rf(path) if File.directory?(path)
     end
 
     c.after :each do
-      File.delete(path) if File.exists?(path)
+      FileUtils.rm_rf(path) if File.directory?(path)
     end
   end
 end

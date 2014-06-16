@@ -1,3 +1,4 @@
+require 'fileutils'
 require 'helper'
 
 describe TomatoHarvest::Config do
@@ -11,7 +12,10 @@ describe TomatoHarvest::Config do
     end
 
     before do
-      File.open(TomatoHarvest::Config::CONFIG_PATH, 'w') do |file|
+      global_dir = TomatoHarvest::Config::GLOBAL_DIR
+      FileUtils.mkdir_p(global_dir) unless File.directory?(global_dir)
+      path = TomatoHarvest::Config.config_path(global_dir)
+      File.open(path, 'w') do |file|
         YAML::dump(global_options, file)
       end
     end
@@ -26,15 +30,17 @@ describe TomatoHarvest::Config do
         options = {
           type:    'JS Development',
         }
-        local_config = File.join(Dir.pwd, '.tomaconfig')
 
-        File.open(local_config, 'w') do |file|
+        local_dir = TomatoHarvest::Config::LOCAL_DIR
+        FileUtils.mkdir_p(local_dir) unless File.directory?(local_dir)
+        path = TomatoHarvest::Config.config_path(local_dir)
+        File.open(path, 'w') do |file|
           YAML::dump(options, file)
         end
 
-        result = global_options.merge(options)
+        expected = global_options.merge(options)
 
-        expect(TomatoHarvest::Config.load).to eql(result)
+        expect(TomatoHarvest::Config.load).to eql(expected)
       end
 
     end
