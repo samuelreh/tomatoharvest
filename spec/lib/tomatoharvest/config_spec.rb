@@ -12,12 +12,8 @@ describe TomatoHarvest::Config do
     end
 
     before do
-      global_dir = TomatoHarvest::Config::GLOBAL_DIR
-      FileUtils.mkdir_p(global_dir) unless File.directory?(global_dir)
-      path = TomatoHarvest::Config.config_path(global_dir)
-      File.open(path, 'w') do |file|
-        YAML::dump(global_options, file)
-      end
+      path = TomatoHarvest::Config.config_path(TomatoHarvest::Config::GLOBAL_DIR)
+      create_yaml_file(path, global_options)
     end
 
     it 'loads from the yaml config file' do
@@ -31,12 +27,8 @@ describe TomatoHarvest::Config do
           type:    'JS Development',
         }
 
-        local_dir = TomatoHarvest::Config::LOCAL_DIR
-        FileUtils.mkdir_p(local_dir) unless File.directory?(local_dir)
-        path = TomatoHarvest::Config.config_path(local_dir)
-        File.open(path, 'w') do |file|
-          YAML::dump(options, file)
-        end
+        path = TomatoHarvest::Config.config_path(TomatoHarvest::Config::LOCAL_DIR)
+        create_yaml_file(path, options)
 
         expected = global_options.merge(options)
 

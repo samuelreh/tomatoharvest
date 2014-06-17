@@ -22,7 +22,7 @@ module TomatoHarvest
     end
 
     def self.config_path(directory)
-      File.join(directory, 'config')
+      File.join(directory, 'config.yaml')
     end
   end
 end

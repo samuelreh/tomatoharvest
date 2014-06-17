@@ -5,8 +5,8 @@ module TomatoHarvest
     PID_DIR = '~'
     PID_NAME = '.toma'
 
-    def self.start(task_id, options = {})
-      new(task_id, options).start
+    def self.start(*args)
+      new(*args).start
     end
 
     def self.stop
@@ -16,11 +16,11 @@ module TomatoHarvest
       end
     end
 
-    def initialize(task_id, options = {})
+    def initialize(list, task_id, options = {})
       @minutes    = options[:minutes]
       @time_entry = options[:time_entry]
       @notifier   = Notifier.new
-      @list       = List.new
+      @list       = list
       @task       = @list.find(task_id)
       @timer      = 0
       @tmux       = Tmux.new

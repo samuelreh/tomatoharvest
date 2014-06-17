@@ -60,10 +60,8 @@ describe TomatoHarvest::CLI do
           password: 'password'
         }
 
-        path = TomatoHarvest::Config::CONFIG_PATH
-        File.open(path, 'w') do |file|
-          YAML::dump(options, file)
-        end
+        path = TomatoHarvest::Config.config_path(TomatoHarvest::Config::GLOBAL_DIR)
+        create_yaml_file(path, options)
       end
 
       it 'starts the timer with specified length' do
