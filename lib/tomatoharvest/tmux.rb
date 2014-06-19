@@ -15,7 +15,7 @@ module TomatoHarvest
     end
 
     def write_tmux_time(time)
-      path = File.join(ENV['HOME'],'.tomatmux')
+      path = File.join(TomatoHarvest::Config::GLOBAL_DIR, 'tmux')
       File.open(path, 'w') do |file|
         file.write tmux_time(time)
       end

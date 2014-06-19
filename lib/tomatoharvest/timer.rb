@@ -2,8 +2,7 @@ require 'daemons'
 
 module TomatoHarvest
   class Timer
-    PID_DIR = '~'
-    PID_NAME = '.toma'
+    PID_NAME = 'pid'
 
     def self.start(*args)
       new(*args).start
@@ -27,7 +26,7 @@ module TomatoHarvest
     end
 
     def start
-      if Daemons.daemonize(app_name: PID_NAME, dir: PID_DIR, dir_mode: :normal)
+      if Daemons.daemonize(app_name: PID_NAME, dir: pid_dir, dir_mode: :normal)
         at_exit { save_and_log }
         run_timer
       else
@@ -37,6 +36,10 @@ module TomatoHarvest
     end
 
     private
+
+    def pid_dir
+      TomatoHarvest::Config::GLOBAL_DIR
+    end
 
     def run_timer
       @notifier.notify "Pomodoro started for #{@minutes} minutes", :subtitle => @task.name
