@@ -18,12 +18,9 @@ RSpec.configure do |c|
   #
   # Speed up the timer
   #
-  c.before :all do
-    class TomatoHarvest::Timer
-      def sleep(time)
-        super(time/100000)
-      end
-    end
+  c.before :each do
+    const = 'TomatoHarvest::Timer::SLEEP_LENGTH'
+    stub_const(const, 1/100000)
   end
 
   #

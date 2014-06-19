@@ -2,6 +2,7 @@ require 'daemons'
 
 module TomatoHarvest
   class Timer
+    SLEEP_LENGTH = 1
     PID_NAME = 'pid'
 
     def self.start(*args)
@@ -9,7 +10,7 @@ module TomatoHarvest
     end
 
     def self.stop
-      if monitor = Daemons::Monitor.find(File.expand_path(DIR), APP_NAME)
+      if monitor = Daemons::Monitor.find(pid_dir, PID_NAME)
         monitor.stop
         true
       end
@@ -26,7 +27,7 @@ module TomatoHarvest
     end
 
     def start
-      if Daemons.daemonize(app_name: PID_NAME, dir: pid_dir, dir_mode: :normal)
+      if Daemons.daemonize(app_name: PID_NAME, dir: self.class.pid_dir, dir_mode: :normal)
         at_exit { save_and_log }
         run_timer
       else
@@ -35,17 +36,17 @@ module TomatoHarvest
       end
     end
 
-    private
-
-    def pid_dir
+    def self.pid_dir
       TomatoHarvest::Config::GLOBAL_DIR
     end
+
+    private
 
     def run_timer
       @notifier.notify "Pomodoro started for #{@minutes} minutes", :subtitle => @task.name
 
       (@minutes * 60).times do |i|
-        sleep 1
+        sleep SLEEP_LENGTH
         @timer += 1
         @tmux.update(@timer)
       end

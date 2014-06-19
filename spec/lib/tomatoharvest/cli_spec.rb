@@ -73,4 +73,13 @@ describe TomatoHarvest::CLI do
 
   end
 
+  describe 'stop' do
+
+    it 'warns when timer isnt running' do
+      out = capture_io { TomatoHarvest::CLI.start ['stop'] }.join ''
+      expect(out).to match(/Timer not running/)
+    end
+
+  end
+
 end
