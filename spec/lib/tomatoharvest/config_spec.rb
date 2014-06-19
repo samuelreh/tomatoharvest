@@ -4,6 +4,7 @@ require 'helper'
 describe TomatoHarvest::Config do
 
   describe '.load' do
+
     let(:global_options) do
       {
         project: 'Project',
@@ -33,6 +34,27 @@ describe TomatoHarvest::Config do
         expected = global_options.merge(options)
 
         expect(TomatoHarvest::Config.load).to eql(expected)
+      end
+
+    end
+
+    context 'when there is an old config file' do
+
+      let(:old_config) do
+        {
+          domain: 'fake.domain.name'
+        }
+      end
+
+      it 'loads it' do
+        old_config_path = File.join(TomatoHarvest::Config::HOME_DIR, '.tomaconfig')
+        expanded_path = File.expand_path(old_config_path)
+        create_yaml_file(expanded_path, old_config)
+
+        expected = old_config.merge(global_options)
+        expect(TomatoHarvest::Config.load).to eql(expected)
+
+        File.delete(old_config_path)
       end
 
     end

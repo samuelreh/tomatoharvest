@@ -40,8 +40,13 @@ RSpec.configure do |c|
     TomatoHarvest::Tmux.any_instance.stub(update: true)
   end
 
+  # Stub Home dir 
+  c.before(:each) do
+    stub_const('TomatoHarvest::Config::HOME_DIR', 'spec/')
+  end
+
   #
-  # Cleanup .toma and .tomaconfig
+  # Cleanup .toma/
   #
 
   [

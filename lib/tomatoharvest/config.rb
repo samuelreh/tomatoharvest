@@ -2,27 +2,37 @@ module TomatoHarvest
   class Config
     DIR_NAME = '.toma'
 
-    GLOBAL_DIR = File.join(ENV['HOME'], DIR_NAME)
+    HOME_DIR   = ENV['HOME']
+    GLOBAL_DIR = File.join(HOME_DIR, DIR_NAME)
     LOCAL_DIR  = File.join(Dir.pwd, DIR_NAME)
 
-    def self.load(options = {})
-      hash = {}
+    def self.load
+      old_config    = merge_config(old_config_path)
 
-      global_config = config_path(GLOBAL_DIR)
-      if File.exists? global_config
-        hash.merge!(YAML.load_file(global_config))
-      end
+      global_path = config_path(GLOBAL_DIR)
+      global_config = merge_config(global_path, old_config)
 
-      local_config = config_path(LOCAL_DIR)
-      if File.exists? local_config
-        hash.merge!(YAML.load_file(local_config))
-      end
+      local_path = config_path(LOCAL_DIR)
+      merge_config(local_path, global_config)
+    end
 
-      hash
+    def self.merge_config(path, base = {})
+      mergable =
+        if File.exists?(path) 
+          YAML.load_file(path)
+        else
+          {}
+        end
+
+      base.merge(mergable)
     end
 
     def self.config_path(directory)
       File.join(directory, 'config.yaml')
+    end
+
+    def self.old_config_path
+      File.join(HOME_DIR, '.tomaconfig')
     end
   end
 end
