@@ -42,7 +42,7 @@ describe TomatoHarvest::Timer do
 
     it 'logs a time entry if passed in' do
       entry = double
-      entry.should_receive(:log)
+      expect(entry).to receive(:log)
       TomatoHarvest::Timer.start(list, task.id, time_entry: entry, minutes: 25)
     end
 

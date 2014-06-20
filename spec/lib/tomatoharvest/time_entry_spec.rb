@@ -6,17 +6,18 @@ describe TomatoHarvest::TimeEntry do
 
     let(:entry) do
       described_class.new.tap do |entry|
-        entry.stub(project: double, task: double)
+        allow(entry).to receive(:project) { double }
+        allow(entry).to receive(:task)    { double }
       end
     end
 
     it "raises an error if project can't be found" do
-      entry.stub(project: nil)
+      allow(entry).to receive(:project) { nil }
       expect{ entry.test }.to raise_error("Couldn't find project")
     end
 
     it "raises an error if task can't be found" do
-      entry.stub(task: nil)
+      allow(entry).to receive(:task) { nil }
       expect{ entry.test }.to raise_error("Couldn't find task type")
     end
 
@@ -79,7 +80,7 @@ describe TomatoHarvest::TimeEntry do
         entry = TomatoHarvest::TimeEntry.new(options)
         entry.log(60 * 30)
 
-        stub.should have_been_requested
+        expect(stub).to have_been_requested
       end
 
     end

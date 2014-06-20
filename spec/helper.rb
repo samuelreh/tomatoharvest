@@ -35,9 +35,9 @@ RSpec.configure do |c|
   # Dont notify the terminal
   #
   c.before do
-    Daemons.stub(daemonize: false)
-    TerminalNotifier.stub(notify: true)
-    TomatoHarvest::Tmux.any_instance.stub(update: true)
+    allow(Daemons).to receive(:daemonize) { false }
+    allow(TerminalNotifier).to receive(:notify) { true }
+    allow_any_instance_of(TomatoHarvest::Tmux).to receive(:update) { true }
   end
 
   # Stub Home dir 
