@@ -10,7 +10,7 @@ module TomatoHarvest
     def_delegators :items, :count, :map
 
     def self.init_and_load(*args)
-      new(*args).tap { |l| l.load! }
+      new(*args).load!
     end
 
     def initialize(path, items = nil)
@@ -22,6 +22,8 @@ module TomatoHarvest
       if File.exists?(@path)
         @items = YAML.load_file(@path)
       end
+      
+      self
     end
 
     def find(id)
@@ -38,6 +40,8 @@ module TomatoHarvest
       File.open(@path, "w+") do |f|
         f.write(yaml)
       end
+
+      self
     end
 
     def add(item)

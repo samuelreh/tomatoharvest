@@ -22,7 +22,7 @@ module TomatoHarvest
         if exists_as_file(old_path)
           old_list = List.init_and_load(old_path)
           File.delete old_path
-          List.new(global_path, old_list.items)
+          List.new(global_path, old_list.items).save!
         end
       end
 

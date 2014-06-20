@@ -25,8 +25,10 @@ describe TomatoHarvest::ListLoader do
         expect(list.count).to eql(1)
       end
 
-      after do
-        File.delete path if File.exists?(path)
+      it 'persists the list' do
+        described_class.from_file
+        list = described_class.from_file
+        expect(list.count).to eql(1)
       end
 
     end
