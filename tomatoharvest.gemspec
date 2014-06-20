@@ -24,7 +24,7 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "webmock"
 
   spec.add_dependency('thor', '~> 0.19')
-  spec.add_dependency('harvested')
+  spec.add_dependency('harvested', '~> 2.0.0')
   spec.add_dependency('daemons')
   spec.add_dependency('terminal-notifier', '~> 1.4') if TomatoHarvest::OS.mac?
 end
