@@ -58,10 +58,6 @@ describe TomatoHarvest::List do
       expect(list.all.first).to be_an_instance_of(TomatoHarvest::Task)
     end
 
-  end
-
-  describe '.list' do
-
     it 'should have two items' do
       add_task('foo')
       add_task('bar')
