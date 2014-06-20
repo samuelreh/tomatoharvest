@@ -54,7 +54,7 @@ module TomatoHarvest
 
     def save_and_log
       @task.log_pomodoro(@timer)
-      @list.save
+      @list.save!
       @time_entry.log(@timer) if @time_entry
       @notifier.notify "Pomodoro finished", :subtitle => "Pomodoro finished!"
       @tmux.update(0)

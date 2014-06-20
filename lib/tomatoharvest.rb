@@ -1,5 +1,6 @@
 require 'tomatoharvest/version'
 require 'tomatoharvest/list'
+require 'tomatoharvest/list_loader'
 require 'tomatoharvest/task'
 require 'tomatoharvest/timer'
 require 'tomatoharvest/cli'

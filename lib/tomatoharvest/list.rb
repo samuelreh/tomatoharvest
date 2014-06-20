@@ -1,48 +1,40 @@
 require 'yaml'
+require 'forwardable'
 
 module TomatoHarvest
   class List
-    FILENAME = 'list.yaml'
+    extend ::Forwardable
 
     attr_reader :items
 
-    alias :all :items
+    def_delegators :items, :count, :map
 
-    def self.list_path(dir)
-      File.join(dir, FILENAME)
+    def self.init_and_load(*args)
+      new(*args).tap { |l| l.load! }
     end
 
-    def self.local_or_global
-      local_path  = list_path(TomatoHarvest::Config::LOCAL_DIR)
-      global_path = list_path(TomatoHarvest::Config::GLOBAL_DIR)
-
-      if File.exists? local_path
-        new(local_path)
-      else
-        new(global_path)
-      end
+    def initialize(path, items = nil)
+      @path  = path
+      @items = items || []
     end
 
-    def initialize(path)
-      @path = path
+    def load!
       if File.exists?(@path)
-        @items = load_list
-      else
-        @items = []
+        @items = YAML.load_file(@path)
       end
     end
 
     def find(id)
-      all.find do |item|
+      @items.find do |item|
         item.id == id.to_i
       end
     end
 
-    def save
+    def save!
       dir = File.dirname(@path)
       FileUtils.mkdir_p(dir) unless File.directory?(dir)
 
-      yaml = YAML::dump(@items)
+      yaml = YAML.dump(@items)
       File.open(@path, "w+") do |f|
         f.write(yaml)
       end
@@ -60,24 +52,9 @@ module TomatoHarvest
     end
 
     def remove(id)
-      all.delete_if do |item|
+      @items.delete_if do |item|
         item.id == id.to_i
       end
-    end
-
-    private
-
-    def load_list
-      string = ""
-
-      # better way to do this?
-      File.open(@path, "r") do |f|
-        while line = f.gets
-          string += line
-        end
-      end
-
-      YAML::load(string)
     end
 
   end

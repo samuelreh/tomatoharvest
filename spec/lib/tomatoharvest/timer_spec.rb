@@ -6,11 +6,14 @@ describe TomatoHarvest::Timer do
 
     let(:task) { TomatoHarvest::Task.new('foo') }
 
-    let(:list) { TomatoHarvest::List.local_or_global }
+    let(:list) do
+      path = TomatoHarvest::ListLoader.global_path
+      TomatoHarvest::List.new(path)
+    end
 
     before do
       list.add(task)
-      list.save
+      list.save!
     end
 
     def stub_notifier(minutes)

@@ -6,17 +6,17 @@ module TomatoHarvest
 
     desc "add", "add a task"
     def add(name)
-      list = List.local_or_global
+      list = ListLoader.from_file
       task = Task.new(name)
       list.add(task)
-      list.save
+      list.save!
       say "#{task.name} added with id #{task.id}"
     end
 
     desc "list", "list all tasks"
     def list
-      list = List.local_or_global
-      table = list.all.map do |task|
+      list  = ListLoader.from_file
+      table = list.map do |task|
         [task.id, task.name]
       end
       table.unshift(['id', 'name'])
@@ -27,7 +27,7 @@ module TomatoHarvest
 
     desc "start", "start a task"
     def start(id, minutes = DEFAULT_MINUTES)
-      list    = List.local_or_global
+      list    = ListLoader.from_file
       task    = list.find(id)
       config  = Config.load.merge("name" => task.name)
       entry   = TimeEntry.build_and_test(config)
@@ -47,7 +47,7 @@ module TomatoHarvest
 
     desc "remove", "remove a task"
     def remove(id)
-      list = List.local_or_global
+      list = ListLoader.from_file
       task = list.remove(id)
       say "#{id} removed"
     end
