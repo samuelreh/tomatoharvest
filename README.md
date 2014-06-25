@@ -7,7 +7,7 @@ Command line pomodoro timer that logs to Harvest.
 
     $ gem install tomatoharvest
     
-Create a file called ~/.tomaconfig with options:
+Create a file called ~/.toma/config.yaml with options:
 ```yaml
   domain: myharvestdomain
   username: username
