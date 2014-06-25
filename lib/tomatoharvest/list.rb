@@ -19,8 +19,8 @@ module TomatoHarvest
     end
 
     def load!
-      if File.exists?(@path)
-        @items = YAML.load_file(@path)
+      if File.exists?(@path) && items = YAML.load_file(@path)
+        @items = items
       end
       
       self

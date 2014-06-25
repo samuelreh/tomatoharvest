@@ -2,14 +2,22 @@ require 'helper'
 
 describe TomatoHarvest::List do
 
-  let(:list) do
-    path = TomatoHarvest::ListLoader.global_path
-    TomatoHarvest::List.new(path)
-  end
+  let(:path) { TomatoHarvest::ListLoader.global_path }
+  let(:list) { TomatoHarvest::List.new(path) }
 
   def add_task(name)
     task = TomatoHarvest::Task.new(name)
     list.add(task)
+  end
+
+  describe 'load!' do
+
+    it 'doesnt load if file is empty' do
+      create_file(path, "")
+      list.load!
+      expect(list.items).to eql([])
+    end
+
   end
 
   describe '.add' do
