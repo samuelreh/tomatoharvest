@@ -49,6 +49,7 @@ module TomatoHarvest
     def remove(id)
       list = ListLoader.from_file
       task = list.remove(id)
+      list.save!
       say "#{id} removed"
     end
 

@@ -30,6 +30,9 @@ describe TomatoHarvest::CLI do
     it 'removes task from the list' do
       out = capture_io { TomatoHarvest::CLI.start ['remove', 1] }.join ''
       expect(out).to match(/1 removed/)
+
+      out = capture_io { TomatoHarvest::CLI.start ['list'] }.join ''
+      expect(out).to match(/id  name\n\z/)
     end
 
   end
