@@ -3,6 +3,12 @@ Command line pomodoro timer that logs to Harvest.
 
 [![Code Climate](https://codeclimate.com/github/samuelreh/tomatoharvest.png)](https://codeclimate.com/github/samuelreh/tomatoharvest)
 
+## Usage
+
+    $ toma add "Some Task I Have To Do"
+    $ toma list
+    $ toma start 1
+
 ## Installation
 
     $ gem install tomatoharvest
@@ -16,11 +22,15 @@ Create a file called ~/.toma/config.yaml with options:
   task: harvest task
 ```
 
-## Usage
+You can create a config for a specific project as well:
+    
+Create a file called /path_to_project/.toma/config.yaml with options:
+```yaml
+  project: different harvest project
+  task: harvest task
+```
 
-    $ toma add "Some Task I Have To Do"
-    $ toma list
-    $ toma start 1
+You can also create a seperate list for a project by creating an empty file at /path_to_project/.toma/list.yaml
 
 ## Contributing
 
