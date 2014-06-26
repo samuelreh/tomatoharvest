@@ -13,7 +13,9 @@ Command line pomodoro timer that logs to Harvest.
 
     $ gem install tomatoharvest
     
-Create a file called ~/.toma/config.yaml with options:
+#### Global Config
+
+Create a file called `~/.toma/config.yaml` with options:
 ```yaml
   domain: myharvestdomain
   username: username
@@ -22,15 +24,15 @@ Create a file called ~/.toma/config.yaml with options:
   task: harvest task
 ```
 
-You can create a config for a specific project as well:
-    
-Create a file called /path_to_project/.toma/config.yaml with options:
+#### Project Config
+
+You can create a config for a specific project as well. Create a file called `path_to_project/.toma/config.yaml` with options:
 ```yaml
   project: different harvest project
   task: harvest task
 ```
 
-You can also create a seperate list for a project by creating an empty file at /path_to_project/.toma/list.yaml
+You can also create a seperate list for a project by creating an empty file at `path_to_project/.toma/list.yaml`
 
 ## Contributing
 
